@@ -4,7 +4,7 @@ export const useStyles = () => {
   return {
     styles: StyleSheet.create({
       box: {
-        flexGrow: 1,
+        flex: 1,
         paddingHorizontal: 16,
         backgroundColor: 'black',
         display: 'flex',
@@ -58,8 +58,9 @@ export const useStyles = () => {
       },
       descriptionText: {
         color: 'white',
-        fontSize: 16,
-        marginRight: 16
+        fontSize: 18,
+        marginRight: 16,
+        fontWeight: 'bold'
       },
       diffTextPositive: {
         color: '#72EC89',
@@ -94,6 +95,13 @@ export const useStyles = () => {
         color: 'black',
         fontSize: 20,
         fontWeight: 'bold'
+      },
+      headingWrapper: {
+        height: 72,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
       }
     })
   }

@@ -4,7 +4,7 @@ export const useStyles = () => {
   return {
     styles: StyleSheet.create({
       box: {
-        flexGrow: 1,
+        flex: 1,
         paddingHorizontal: 16,
         backgroundColor: 'black'
       },
@@ -46,6 +46,49 @@ export const useStyles = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
+        justifyContent: 'space-between'
+      },
+      searchBar: {
+        backgroundColor: 'black',
+        color: 'white',
+        borderBottomColor: 'black',
+        borderTopColor: 'black'
+      },
+      searchBarInputContainerStyle: {
+        backgroundColor: 'black',
+        borderBottomColor: 'black',
+        borderTopColor: 'black'
+      },
+      searchBarContainerStyle: {
+        width: '80%',
+        height: 72,
+        backgroundColor: 'black',
+        borderBottomColor: 'black',
+        borderTopColor: 'black',
+        padding: 0,
+        margin: 0,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+      },
+      sortWrapper: {
+        width: '20%',
+        height: 72,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+      },
+      loaderBox: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      headerWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
         justifyContent: 'space-between'
       }
     })

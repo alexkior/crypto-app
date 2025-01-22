@@ -1,6 +1,8 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { Pressable, Text, View } from 'react-native'
 
+import { Icon } from '@rneui/themed'
+
 import { RouteList, StackNavigation } from '../../app/ui/Application'
 import { useStyles } from './CurrencyPage.styles'
 
@@ -15,6 +17,9 @@ export const CurrencyPage: React.FC = () => {
   return (
     <View style={styles.box}>
       <View>
+        <View style={styles.headingWrapper}>
+          <Icon onPress={() => navigation.goBack()} name="close" size={32} color={'white'} />
+        </View>
         <View style={styles.headerWrapper}>
           <Text style={styles.currencyText}>{name.toUpperCase()}</Text>
           <View style={styles.currencyDetailsBox}>
@@ -24,19 +29,19 @@ export const CurrencyPage: React.FC = () => {
         </View>
         <View style={styles.detailsWrapper}>
           <View style={styles.detailsRow}>
-            <Text style={styles.titleText}>Rate</Text>
+            <Text style={styles.titleText}>Medium price</Text>
             <Text style={styles.descriptionText}>{usdRate}</Text>
           </View>
           <View style={styles.detailsRow}>
-            <Text style={styles.titleText}>Ask</Text>
+            <Text style={styles.titleText}>Ask price</Text>
             <Text style={styles.descriptionText}>{usdAsk}</Text>
           </View>
           <View style={styles.detailsRow}>
-            <Text style={styles.titleText}>Bid</Text>
+            <Text style={styles.titleText}>Bid price</Text>
             <Text style={styles.descriptionText}>{usdBid}</Text>
           </View>
           <View style={styles.detailsRow}>
-            <Text style={styles.titleText}>24h Diff</Text>
+            <Text style={styles.titleText}>24 hours movement{'\n'}of the price</Text>
             <Text style={styles.descriptionText}>{usdDiff24h}</Text>
           </View>
         </View>
