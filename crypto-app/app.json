@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "crypto-app",
-    "slug": "some random crypto app",
+    "slug": "some-random-crypto-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,16 +13,24 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alexkior.somerandomcryptoapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alexkior.somerandomcryptoapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "505d0128-86dd-4018-9e95-7027689f03ef"
+      }
+    },
+    "owner": "alexkior"
   }
 }
