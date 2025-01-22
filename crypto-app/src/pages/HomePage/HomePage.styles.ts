@@ -30,19 +30,19 @@ export const useStyles = () => {
         marginRight: 16
       },
       diffTextPositive: {
-        color: 'green',
-        fontSize: 16,
+        color: '#72EC89',
+        fontSize: 18,
         marginRight: 16,
         fontWeight: 'bold'
       },
       diffTextNegative: {
         color: 'red',
-        fontSize: 16,
+        fontSize: 18,
         marginRight: 16,
         fontWeight: 'bold'
       },
       currencyDetailsBox: {
-        height: '60%',
+        height: '54%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
