@@ -5,7 +5,7 @@ export const useStyles = () => {
     styles: StyleSheet.create({
       box: {
         flexGrow: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'black'
       }
     })
   }

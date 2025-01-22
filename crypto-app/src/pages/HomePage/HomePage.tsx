@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
-import { FlatList, Pressable, Text } from 'react-native'
+import { FlatList, Pressable, Text, View } from 'react-native'
 
 import { StackNavigation } from '../../app/ui/Application'
 import { useStyles } from './HomePage.styles'
@@ -28,8 +28,13 @@ export const HomePage: React.FC = () => {
 
   const CurrencyCard: React.FC<{ data: CurrencyData }> = ({ data }) => (
     <Pressable style={styles.buttonWrapper} onPress={() => navigation.navigate('CurrencyPage', data)}>
-      <Text>{data.name}</Text>
-      <Text>{data.usdRate}</Text>
+      <Text style={styles.currencyText}>{data.name.toUpperCase()}</Text>
+      <View style={styles.currencyDetailsBox}>
+        <Text style={data.usdDiff24h >= 0 ? styles.diffTextPositive : styles.diffTextNegative}>
+          {((data.usdDiff24h / data.usdRate) * 100).toFixed(2)}%
+        </Text>
+        <Text style={styles.rateText}>{data.usdRate}</Text>
+      </View>
     </Pressable>
   )
 
@@ -58,12 +63,14 @@ export const HomePage: React.FC = () => {
 
   const renderItem = ({ item }: { item: CurrencyData }) => <CurrencyCard data={item} />
   return (
-    <FlatList
-      data={products}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.name}
-      numColumns={1}
-      contentContainerStyle={{ flexGrow: 1 }}
-    />
+    <View style={styles.box}>
+      <FlatList
+        data={products}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.name}
+        numColumns={1}
+        contentContainerStyle={{ flexGrow: 1 }}
+      />
+    </View>
   )
 }

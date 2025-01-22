@@ -8,11 +8,10 @@ export const useStyles = () => {
         paddingHorizontal: 16,
         backgroundColor: 'black'
       },
-      buttonWrapper: {
+      detailsWrapper: {
         display: 'flex',
-        height: 64,
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
         justifyContent: 'space-between',
         backgroundColor: '#2a2929',
         marginVertical: 16,
@@ -21,7 +20,7 @@ export const useStyles = () => {
       currencyText: {
         color: 'white',
         fontSize: 40,
-        fontWeight: 'thin',
+        // fontWeight: 'bold',
         marginLeft: 16
       },
       rateText: {
