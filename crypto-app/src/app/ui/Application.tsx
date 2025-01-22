@@ -1,16 +1,9 @@
-import { NavigationProp } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Pages } from '../../pages'
-import { CurrencyData } from '../../shared'
+import { RouteList } from '../../shared'
 import { useStyles } from './Application.styles'
-
-export type RouteList = {
-  CurrencyPage: CurrencyData
-  HomePage: undefined
-}
-export type StackNavigation = NavigationProp<RouteList>
 
 const Stack = createStackNavigator<RouteList>()
 

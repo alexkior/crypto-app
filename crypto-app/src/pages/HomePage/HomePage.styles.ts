@@ -90,6 +90,12 @@ export const useStyles = () => {
         flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'space-between'
+      },
+      errorText: {
+        paddingTop: 16,
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold'
       }
     })
   }

@@ -40,7 +40,6 @@ export const useStyles = () => {
       currencyText: {
         color: 'white',
         fontSize: 40,
-        // fontWeight: 'bold',
         marginLeft: 16
       },
       detailsRow: {

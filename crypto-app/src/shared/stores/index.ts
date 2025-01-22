@@ -1,1 +1,1 @@
-export { CurrencyData, currencyStore } from './currencyStore'
+export { currencyStore } from './currencyStore'

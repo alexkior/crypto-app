@@ -1,14 +1,13 @@
 import { useNavigation } from '@react-navigation/native'
 import { observer } from 'mobx-react-lite'
-import React, { useEffect } from 'react'
-import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from 'react-native'
+import React, { useCallback, useEffect } from 'react'
+import { ActivityIndicator, FlatList, RefreshControl, View, Text } from 'react-native'
 
 import { toJS } from 'mobx'
 
 import { SearchBar, Icon } from '@rneui/themed'
 
-import { StackNavigation } from '../../app/ui/Application'
-import { CurrencyData, currencyStore } from '../../shared'
+import { CurrencyData, currencyStore, StackNavigation, CurrencyCard } from '../../shared'
 import { useStyles } from './HomePage.styles'
 
 export const HomePage: React.FC = observer(() => {
@@ -16,21 +15,16 @@ export const HomePage: React.FC = observer(() => {
 
   const { styles } = useStyles()
 
+  const onCurrencyPress = useCallback(
+    (data: CurrencyData) => {
+      navigation.navigate('CurrencyPage', toJS(data))
+    },
+    [navigation]
+  )
+
   useEffect(() => {
     currencyStore.fetchCurrencies()
   }, [])
-
-  const CurrencyCard: React.FC<{ data: CurrencyData }> = ({ data }) => (
-    <Pressable style={styles.buttonWrapper} onPress={() => navigation.navigate('CurrencyPage', toJS(data))}>
-      <Text style={styles.currencyText}>{data.name.toUpperCase()}</Text>
-      <View style={styles.currencyDetailsBox}>
-        <Text style={data.usdDiff24h >= 0 ? styles.diffTextPositive : styles.diffTextNegative}>
-          {((data.usdDiff24h / data.usdRate) * 100).toFixed(2)}%
-        </Text>
-        <Text style={styles.rateText}>{data.usdRate}</Text>
-      </View>
-    </Pressable>
-  )
 
   return (
     <View style={styles.box}>
@@ -65,21 +59,30 @@ export const HomePage: React.FC = observer(() => {
           <ActivityIndicator size="large" color="#72EC89" />
         </View>
       ) : (
-        <FlatList
-          data={currencyStore.filteredAndSortedProducts}
-          renderItem={({ item }) => <CurrencyCard data={item} />}
-          keyExtractor={(item) => item.name}
-          numColumns={1}
-          contentContainerStyle={{ flexGrow: 1 }}
-          refreshControl={
-            <RefreshControl
-              refreshing={currencyStore.loading}
-              onRefresh={() => currencyStore.fetchCurrencies()}
-              colors={['grey']}
-              progressBackgroundColor={'black'}
+        <>
+          {currencyStore.error ? (
+            <View style={styles.loaderBox}>
+              <Icon name="error" size={48} color="red" />
+              <Text style={styles.errorText}>{currencyStore.error}</Text>
+            </View>
+          ) : (
+            <FlatList
+              data={currencyStore.filteredAndSortedProducts}
+              renderItem={({ item }) => <CurrencyCard data={item} onPress={onCurrencyPress} />}
+              keyExtractor={(item) => item.name}
+              numColumns={1}
+              contentContainerStyle={{ flexGrow: 1 }}
+              refreshControl={
+                <RefreshControl
+                  refreshing={currencyStore.loading}
+                  onRefresh={() => currencyStore.fetchCurrencies()}
+                  colors={['grey']}
+                  progressBackgroundColor={'black'}
+                />
+              }
             />
-          }
-        />
+          )}
+        </>
       )}
     </View>
   )

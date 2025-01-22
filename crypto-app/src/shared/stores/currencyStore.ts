@@ -1,21 +1,7 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 
-export interface CurrencyData {
-  name: string
-  usdRate: number
-  usdAsk: number
-  usdBid: number
-  usdDiff24h: number
-}
-
-interface RawCurrencyData {
-  [key: string]: {
-    rate: number
-    ask: number
-    bid: number
-    diff24h: number
-  }
-}
+import { CurrencyData, RawCurrencyData } from '../types'
+import { validateApiResponse } from '../utils'
 
 class CurrencyStore {
   loading = true
@@ -23,18 +9,31 @@ class CurrencyStore {
   search = ''
   sort = false
   sortAscending = false
+  error: string | null = null
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, {}, { autoBind: true })
   }
 
-  fetchCurrencies = async () => {
-    this.loading = true
+  async fetchCurrencies() {
+    runInAction(() => {
+      this.loading = true
+      this.error = null
+    })
     try {
       const response = await fetch('https://app.youhodler.com/api/v3/rates/extended')
-      const data = await response.json()
-      this.products = Object.entries(data).flatMap(([currencyKey, items]) =>
-        Object.entries(items as RawCurrencyData)
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status} ${response.statusText}`)
+      }
+
+      const data: unknown = await response.json()
+      if (!validateApiResponse(data)) {
+        throw new Error('Invalid API response structure')
+      }
+
+      const products = Object.entries(data).flatMap(([currencyKey, items]) =>
+        Object.entries(items as unknown as RawCurrencyData)
           .filter(([name]) => name.toLowerCase() === 'usd')
           .map(([, details]) => ({
             name: currencyKey,
@@ -44,10 +43,18 @@ class CurrencyStore {
             usdDiff24h: details.diff24h
           }))
       )
+
+      runInAction(() => {
+        this.products = products
+      })
     } catch (error) {
-      console.error('Error fetching data:', error)
+      runInAction(() => {
+        this.error = error instanceof Error ? error.message : 'An unknown error occurred'
+      })
     } finally {
-      this.loading = false
+      runInAction(() => {
+        this.loading = false
+      })
     }
   }
 

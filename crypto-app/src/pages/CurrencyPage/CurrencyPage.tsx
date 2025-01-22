@@ -3,8 +3,7 @@ import { Pressable, Text, View } from 'react-native'
 
 import { Icon } from '@rneui/themed'
 
-import { RouteList, StackNavigation } from '../../app/ui/Application'
-import { currencyStore } from '../../shared'
+import { currencyStore, RouteList, StackNavigation } from '../../shared'
 import { useStyles } from './CurrencyPage.styles'
 
 export const CurrencyPage: React.FC = () => {
