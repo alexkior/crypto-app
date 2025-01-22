@@ -4,7 +4,12 @@ export const useStyles = () => {
   return {
     styles: StyleSheet.create({
       buttonWrapper: {
-        marginVertical: 16
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginVertical: 16,
+        
       }
     })
   }

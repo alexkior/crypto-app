@@ -3,10 +3,11 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Pages } from '../../pages'
+import { CurrencyData } from '../../pages/HomePage/HomePage'
 import { useStyles } from './Application.styles'
 
 export type RouteList = {
-  CurrencyPage: undefined
+  CurrencyPage: CurrencyData
   HomePage: undefined
 }
 export type StackNavigation = NavigationProp<RouteList>
