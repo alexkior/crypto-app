@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Pages } from '../../pages'
-import { CurrencyData } from '../../pages/HomePage/HomePage'
+import { CurrencyData } from '../../shared'
 import { useStyles } from './Application.styles'
 
 export type RouteList = {

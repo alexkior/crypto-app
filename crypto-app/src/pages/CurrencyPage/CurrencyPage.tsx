@@ -4,6 +4,7 @@ import { Pressable, Text, View } from 'react-native'
 import { Icon } from '@rneui/themed'
 
 import { RouteList, StackNavigation } from '../../app/ui/Application'
+import { currencyStore } from '../../shared'
 import { useStyles } from './CurrencyPage.styles'
 
 export const CurrencyPage: React.FC = () => {
@@ -14,11 +15,16 @@ export const CurrencyPage: React.FC = () => {
   const { styles } = useStyles()
   const percentDiff24h = ((usdDiff24h / usdRate) * 100).toFixed(2) + '%'
 
+  const onGoBack = () => {
+    currencyStore.fetchCurrencies()
+    navigation.goBack()
+  }
+
   return (
     <View style={styles.box}>
       <View>
         <View style={styles.headingWrapper}>
-          <Icon onPress={() => navigation.goBack()} name="close" size={32} color={'white'} />
+          <Icon onPress={onGoBack} name="close" size={32} color={'white'} />
         </View>
         <View style={styles.headerWrapper}>
           <Text style={styles.currencyText}>{name.toUpperCase()}</Text>
@@ -46,7 +52,7 @@ export const CurrencyPage: React.FC = () => {
           </View>
         </View>
       </View>
-      <Pressable style={styles.buttonWrapper} onPress={() => navigation.goBack()}>
+      <Pressable style={styles.buttonWrapper} onPress={onGoBack}>
         <Text style={styles.buttonText}>Back</Text>
       </Pressable>
     </View>
