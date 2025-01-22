@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react-hooks", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": "off",
+    "no-console": "off",
+    "@typescript-eslint/no-var-requires": [1],
+    "import/no-duplicates": ["warn"]
+  },
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true,
+    "jest": true
+  }
+}
